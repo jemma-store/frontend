@@ -1,0 +1,16 @@
+export { HomePage } from './HomePage';
+export { Catalog } from './Catalog';
+export { Cart } from './Cart';
+export { AuthLogin } from './AuthLogin';
+export { AuthRegister } from './AuthRegister';
+export { Favorite } from './Favorite';
+export { CompareProductsPage } from './CompareProductsPage';
+export { SingleProduct } from './SingleProduct';
+export { PublicAgreement } from './PublicAgreement';
+export { PrivacyPolicy } from './PrivacyPolicy';
+export { UserAccount } from './UserAccount';
+export { UserAgreement } from './UserAgreement';
+export { Checkout } from './Checkout';
+export { Certificates } from './Certificates';
+export { SuccessfulRegister } from './SuccessfulRegister';
+export { NotFound } from './404'
