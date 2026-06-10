@@ -116,7 +116,7 @@ const Header = () => {
               if (item.title === 'search') {
                 return (
                   <button
-                    className="btn"
+                    className="btn search-toggle-btn" 
                     onClick={() => {
                       setSearchOpen(!searchOpen);
                       toggleActiveButton('search');
@@ -192,7 +192,7 @@ const Header = () => {
                 if (item.title === 'search') {
                   return (
                     <button
-                      className="btn"
+                      className="btn search-toggle-btn" 
                       onClick={() => {
                         setSearchOpen(!searchOpen);
                         toggleActiveButton('search');
@@ -300,12 +300,12 @@ const Header = () => {
                   if (item.title === 'search') {
                     return (
                       <button
-                        className="btn"
-                        onClick={() => {
-                          setSearchOpen(!searchOpen);
-                          toggleActiveButton('search');
-                        }}
-                        key={item.title}
+                          className="btn search-toggle-btn" 
+                          onClick={() => {
+                            setSearchOpen(!searchOpen);
+                            toggleActiveButton('search');
+                          }}
+                          key={item.title}
                       >
                         <Icon classname={`text-${iconColor}`} />
                       </button>
