@@ -99,21 +99,6 @@ export const Filters = () => {
     );
   };
 
-  // const handleMaterialChange = (value: string) => {
-  //   const updated = selectedMaterials.includes(value)
-  //     ? selectedMaterials.filter((v) => v !== value)
-  //     : [...selectedMaterials, value];
-
-  //   setSearchParams(
-  //     setQueryParams({
-  //       ...getQueryParams(searchParams),
-  //       material: updated,
-  //       page: 1,
-  //       direction: sort,
-  //     }),
-  //   );
-  // };
-
   return (
 
     <aside className="flex flex-col gap-8 mr-5 w-full">

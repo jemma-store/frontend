@@ -9,6 +9,8 @@ export const Collections = () => {
   const { collections, page, sortBy, priceRange } = useCatalogStore();
 
   const mainCollection = collections.find((c) => c.name.toLowerCase() === 'heart');
+  const productWithImageForMain = mainCollection?.products.find((item) => item.images && item.images.length > 0);
+  const mainImageUrl = productWithImageForMain?.images[0]?.url;
   const secondaryCollections = collections
   .filter((c) => c.name.toLowerCase() !== 'heart')
   .slice(0, 4);
@@ -20,15 +22,15 @@ export const Collections = () => {
 
         <div className="w-full h-full flex items-start justify-between xl:gap-5 gap-2">
           {mainCollection && (
-            <Card className="sm:w-[350px] sm:h-[426px] xl:w-[649px] xl:h-[790px] w-[175px] h-[214px] shrink-0 group">
+            <Card className="sm:w-[350px] sm:h-[426px] xl:w-[649px] xl:h-[790px] w-[175px] h-[214px] shrink-0 group cursor-pointer">
               <CardContent className="relative w-full h-full overflow-hidden">
                 <div className="flex flex-col w-full h-full items-center bg-cover bg-center">
                   <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
 
-                  {mainCollection.products[0]?.images && (
+                  {mainCollection.products.find((item) => item.images && item.images.length > 0)&& (
                     <img
                       className="absolute w-full h-full object-cover scale-100 group-hover:scale-107 transition-all duration-300 brightness-70"
-                      src={mainCollection.products[2]?.images[1]?.url}
+                      src={mainImageUrl}
                       alt={mainCollection.name}
                     />
                   )}
@@ -51,39 +53,50 @@ export const Collections = () => {
           )}
 
           <div className="w-full grid grid-cols-2 gap-1.5 sm:gap-3 xl:gap-5 items-start justify-between">
-            {secondaryCollections.map((collection) => (
-              <Card
-                key={collection.id}
-                className="sm:h-[206px] xl:w-full xl:h-[385px] w-full h-[104px] shrink-0 overflow-hidden group"
-              >
-                <CardContent className="w-full h-full relative overflow-hidden">
-                  <div className="flex flex-col h-full items-center w-full bg-cover bg-center">
-                    {collection.products[0]?.images && (
-                      <img
-                        className="absolute w-full h-full object-cover scale-100 group-hover:scale-107 transition-all duration-300 brightness-70"
-                        src={collection.products[0]?.images[0]?.url}
-                        alt={collection.name}
-                      />
-                    )}
+            {secondaryCollections.map((collection) => {
+              
+              const productWithImage = collection.products.find(
+                (item) => item.images && item.images.length > 0
+              );
+              
+              const imageUrl = productWithImage?.images[0]?.url;
 
-                    <Link
-                      to={`${AppRoute.PRODUCTS}${setQueryParams({
-                        page,
-                        collections: [collection.name],
-                        sortBy: sortBy,
-                        minPrice: priceRange[0],
-                        maxPrice: priceRange[1],
-                      })}`}
-                      className="w-full text-center absolute bottom-1 xl:bottom-5 left-0 z-20 opacity-100 transition-all duration-300  sm:mb-2"
-                    >
-                      <h1 className="w-full text-main text-center text-[20px] xl:text-heading1 sm:text-[40px]">
-                        {collection.name}
-                      </h1>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+              return (
+                <Card
+                  key={collection.id}
+                  className="sm:h-[206px] xl:w-full xl:h-[385px] w-full h-[104px] shrink-0 overflow-hidden group cursor-pointer"
+                >
+                  <CardContent className="w-full h-full relative overflow-hidden">
+                    <div className="flex flex-col h-full items-center w-full bg-cover bg-center">
+                      
+                      {/* 4. Рендеримо картинку ТІЛЬКИ якщо imageUrl існує */}
+                      {imageUrl && (
+                        <img
+                          className="absolute w-full h-full object-cover scale-100 group-hover:scale-107 transition-all duration-300 brightness-70"
+                          src={imageUrl}
+                          alt={collection.name}
+                        />
+                      )}
+
+                      <Link
+                        to={`${AppRoute.PRODUCTS}${setQueryParams({
+                          page,
+                          collections: [collection.name],
+                          sortBy: sortBy,
+                          minPrice: priceRange[0],
+                          maxPrice: priceRange[1],
+                        })}`}
+                        className="w-full text-center absolute bottom-1 xl:bottom-5 left-0 z-20 opacity-100 transition-all duration-300  sm:mb-2"
+                      >
+                        <h1 className="w-full text-main text-center text-[20px] xl:text-heading1 sm:text-[40px]">
+                          {collection.name}
+                        </h1>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </div>

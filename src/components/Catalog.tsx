@@ -25,7 +25,7 @@ export const Catalog: FC<ICatalogProps> = ({ data }) => {
   };
 
   console.log("Поточна сторінка з бекенду:", products.page.number);
-console.log("Поточна сторінка з CatalogStore:", page);
+  console.log("Поточна сторінка з CatalogStore:", page);
 
   return (
     <>

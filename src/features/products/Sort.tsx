@@ -42,7 +42,7 @@ export const Sort = () => {
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
-      <PopoverTrigger className="border-1 p-1 gap-1 w-full flex cursor-pointer text-[16px] font-medium align-center md:border-none lg:border-none lg:gap-5">
+      <PopoverTrigger className="border-1 p-1 gap-1 w-full flex cursor-pointer text-[16px] font-medium align-center md:border-none lg:border-none lg:gap-5 ">
         <SortIcon />
         {selectedSort ? selectedSort.label : 'За популярністю'}
         <ArrowDownIcon
@@ -52,7 +52,7 @@ export const Sort = () => {
         />
       </PopoverTrigger>
 
-      <PopoverContent className="relative top-2 z-1000 w-[280px] min-h-[170px] p-0 m-0 bg-main flex flex-col text-start">
+      <PopoverContent className=" w-[var(--radix-popover-trigger-width)] relative top-2 z-1000  min-h-[170px] p-0 m-0 bg-main flex flex-col text-start">
         {sortOptions.map((opt) => (
           <div
             className={
