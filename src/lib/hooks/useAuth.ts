@@ -58,7 +58,7 @@ const VERIFY_CODE_INITIAL_VALUE: VerifyRequest = {
 };
 
 const REGISTER_FORM_INITIAL_VALUE: RegisterRequest = {
-  name: '',
+  firstName: '',
   email: '',
 };
 
