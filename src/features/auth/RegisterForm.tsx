@@ -45,29 +45,29 @@ export const RegisterForm: FC<RegisterFormProps> = ({
               <div
                 className={cn(
                   'flex items-center gap-2 border-0 border-b-2 bg-transparent rounded-none focus-within:border-brown-dark focus-within:text-brown-dark',
-                  errors.name ? 'border-error text-error' : 'border-grey text-grey',
+                  errors.firstName ? 'border-error text-error' : 'border-grey text-grey',
                 )}
               >
                 <UserIcon
                   classname={cn(
                     'w-5 h-5 text-inherit',
-                    errors.name ? 'border-error text-error' : 'border-grey text-grey',
+                    errors.firstName ? 'border-error text-error' : 'border-grey text-grey',
                   )}
                 />
                 <Input
-                  {...register('name')}
+                  {...register('firstName')}
                   name="name"
                   className="w-full h-10 pr-5 !bg-transparent border-none"
                   type="text"
                   placeholder="Ваше ім'я"
                   onChange={(e) => {
-                    setValue('name', e.target.value);
-                    onChangeField({ ...initialValues, name: e.target.value });
+                    setValue('firstName', e.target.value);
+                    onChangeField({ ...initialValues, firstName: e.target.value });
                   }}
                 />
               </div>
-              {errors.name && (
-                <p className="text-error text-xs text-center mt-1">{errors.name.message}</p>
+              {errors.firstName && (
+                <p className="text-error text-xs text-center mt-1">{errors.firstName.message}</p>
               )}
             </div>
 

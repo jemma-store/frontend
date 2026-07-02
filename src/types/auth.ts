@@ -1,5 +1,5 @@
 interface RegisterRequest {
-  name: string;
+  firstName: string;
   email: string;
 }
 interface RegisterResponse {
@@ -26,7 +26,7 @@ interface LoginResponse {
 }
 
 interface UpdateProfileRequest {
-  name: string;
+  firstName: string;
   phone?: string;
 }
 

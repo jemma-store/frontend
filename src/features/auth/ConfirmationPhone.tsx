@@ -86,14 +86,14 @@ export const PopUpConfirmationPhone = () => {
   return (
     <Dialog open={isOpen} onOpenChange={close}>
       <DialogTrigger className="hidden" />
-      <DialogContent className="max-w-[448px] flex flex-col items-center gap-6">
+      <DialogContent className="max-w-[448px] flex flex-col items-center gap-6 p-5">
         <DialogTitle className="w-[309px] text-center text-second  font-[500] font-main">
           Підтвердження номеру телефону
         </DialogTitle>
         <DialogDescription className="hidden" />
 
         <p className="text-center text-grey">
-          Введіть код, який було відправлено вам на номер <span>{phone}</span>
+          Введіть код, який було відправлено на Вашу пошту <span>{phone}</span>
         </p>
 
         <div className="min-w-[164px]">
