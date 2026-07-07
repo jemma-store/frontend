@@ -29,7 +29,7 @@ export const PopUpConfirmationPhone = () => {
 
   useEffect(() => {
     if (isOpen) {
-      setCode(['', '', '', '']);
+      setCode(['', '', '', '', '', '']);
       setError(null);
       setShowResend(false);
       setTimeout(() => inputsRef.current[0]?.focus(), 100);
@@ -59,7 +59,7 @@ export const PopUpConfirmationPhone = () => {
 
   const handleVerify = () => {
     const joined = code.join('');
-    if (joined.length < 4) {
+    if (joined.length < 6) {
       setError('Введіть усі цифри коду');
       return;
     }
