@@ -44,7 +44,7 @@ export const PopUpConfirmationPhone = () => {
     setCode(newCode);
     setError(null);
 
-    if (value && index < 3) {
+    if (value && index < 5) {
       inputsRef.current[index + 1]?.focus();
     }
 
