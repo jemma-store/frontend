@@ -2,7 +2,7 @@ import axiosInstance from "@/api/axiosInstance"
 
 export const getTotalRevenue = async (period : string) => {
     try {
-        const response = await axiosInstance.get("/api/orders/revenue", {
+        const response = await axiosInstance.get("/api/admon/orders/revenue", {
             params : {
                 period
             }
@@ -16,7 +16,7 @@ export const getTotalRevenue = async (period : string) => {
 
 export const getTotalOrders = async (period : string, page : number , pageSize : number) => {
     try {
-        const response = await axiosInstance.get("/api/orders/by-period", {
+        const response = await axiosInstance.get("/api/admin/orders/by-period", {
             params : {
                 period,
                 page,
@@ -32,7 +32,7 @@ export const getTotalOrders = async (period : string, page : number , pageSize :
 
 export const getTotalProducts = async () => {
     try {
-        const response = await axiosInstance.get("/api/products");
+        const response = await axiosInstance.get("/api/admin/products");
         return response.data
     } catch (error) {
         console.error(error)
@@ -42,7 +42,7 @@ export const getTotalProducts = async () => {
 
 export const getProductById = async (id : string) => {
     try {
-        const response = await axiosInstance.get(`/api/products/id/${id}`)
+        const response = await axiosInstance.get(`/api/admin/products/${id}`)
         return response.data
     } catch (error) {
         console.error(error)
@@ -52,7 +52,7 @@ export const getProductById = async (id : string) => {
 
 export const getTotalUsers = async () => {
     try {
-        const response = await axiosInstance.get("/api/users")
+        const response = await axiosInstance.get("/api/admin/users")
         return response.data
     } catch (error) {
         console.log(error)
@@ -62,7 +62,7 @@ export const getTotalUsers = async () => {
 
 export const availableQuantityProducts = async (id : string | number) => {
     try {
-       const response = await axiosInstance.get(`/api/products/id/${id}`);
+       const response = await axiosInstance.get(`/api/admin/products/${id}`);
        return response.data;
     } catch (error) {
         console.error("Не вдалося отримати залишки по товару", error);

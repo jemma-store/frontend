@@ -2,7 +2,6 @@ import { ProductFormState } from "@/admin-panel/types/productFormState";
 import { FILTER_BY_METAL, FILTER_BY_STONE } from "@/admin-panel/constants/filterByDate";
 
 export interface ProductPayload {
-    id: number;
     name: string;
     productSizes: number[];
     price: {
@@ -13,7 +12,7 @@ export interface ProductPayload {
     isNew: boolean;
     categoryName: string;
     collectionName: string;
-    images: { url: string; isMainImage: boolean; }[];
+    // images: { url: string; isMainImage: boolean; }[];
     description: {
         defaultReturnText: string;
         defaultDeliveryText: string;
@@ -29,11 +28,10 @@ export interface ProductPayload {
             };
         };
     };
-    status: string;
 }
 
 
-export const prepareProductPayload = (data: ProductFormState, status: "PUBLISHED" | "DRAFT" , id: number): ProductPayload => {
+export const prepareProductPayload = (data: ProductFormState): ProductPayload => {
     const metalLabel = FILTER_BY_METAL.find(m => m.value === data.description.characteristic.metal)?.label || "";
     const stoneLabels = data.description.characteristic.stones
         .map(stoneKey => FILTER_BY_STONE.find(s => s.value === stoneKey)?.label)
@@ -42,7 +40,6 @@ export const prepareProductPayload = (data: ProductFormState, status: "PUBLISHED
 
 
     return {
-        id : id,
         name: data.name || "",
         productSizes: data.productSizes.length > 0 ? data.productSizes : [0],
         price: {
@@ -53,14 +50,14 @@ export const prepareProductPayload = (data: ProductFormState, status: "PUBLISHED
         isNew: data.isNew,
         categoryName: data.categoryName,
         collectionName: data.collectionName,
-        images: data.images, 
+        // images: data.images, 
         description: {
             defaultReturnText: data.description.defaultReturnText || "Стандартні умови повернення",
             defaultDeliveryText: data.description.defaultDeliveryText || "Стандартні умови доставки",
             characteristic: {
                 metal: metalLabel,
                 stone: stoneLabels,
-                color: data.description.characteristic.color,
+                color: data.description?.characteristic?.color || "Не вказано",
                 averageWeight: Number(data.description.characteristic.averageWeight) || 0,
                 size: {
                     width: Number(data.description.characteristic.size.width) || 0,
@@ -68,7 +65,6 @@ export const prepareProductPayload = (data: ProductFormState, status: "PUBLISHED
                     length: Number(data.description.characteristic.size.length) || 0,
                 }
             }
-        },
-        status: status 
+        }
     };
 };

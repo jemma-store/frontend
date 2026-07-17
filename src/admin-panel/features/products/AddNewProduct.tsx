@@ -20,7 +20,7 @@ export const AddNewProduct = ({disabled} : AddNewProductProps) => {
     const formData = useProductForm((state) => state.formData);
     const updateField = useProductForm((state) => state.updateField);
     const id = useProductForm((state) => state.formData.id);
-    const resetForm = useProductForm((state) => state.resetForm); // 👈 Витягуємо функцію очищення
+    const resetForm = useProductForm((state) => state.resetForm); 
     
     const [isLoading, setIsLoading] = useState(false);
 
@@ -31,7 +31,7 @@ export const AddNewProduct = ({disabled} : AddNewProductProps) => {
     const handleSubmit = async () => {
         setIsLoading(true);
         try {
-            const payload = prepareProductPayload(formData, "PUBLISHED", id);
+            const payload = prepareProductPayload(formData);
             const createdProduct = await createProductService(payload);
             const newProductId = createdProduct.id;
             
@@ -45,7 +45,7 @@ export const AddNewProduct = ({disabled} : AddNewProductProps) => {
                 imageForm.append("productId", String(newProductId));
                 imageForm.append("isMain", String(image.isMainImage));
 
-                await axiosInstance.post("/api/images/upload", imageForm, {
+                await axiosInstance.post("/api/admin/images/upload", imageForm, {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }
@@ -65,7 +65,7 @@ export const AddNewProduct = ({disabled} : AddNewProductProps) => {
 
     const handleSaveDraft = async () => {
         try {
-            const payload = prepareProductPayload(formData, "DRAFT", id);
+            const payload = prepareProductPayload(formData);
             const result = await saveAsDraftService(id, payload);
             return result;
         } catch (error) {

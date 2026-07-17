@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 export const createProductService = async (payload: any) => {
     try {
-        const response = await axiosInstance.post("/api/products", payload);
+        const response = await axiosInstance.post("/api/admin/products", payload);
         return response.data;
     } catch (error) {
         const axiosError = error as AxiosError;
@@ -14,7 +14,7 @@ export const createProductService = async (payload: any) => {
 
 export const deleteProductByIdService = async (id: number): Promise<void> => {
     try {
-        const response = await axiosInstance.delete(`/api/products/${id}`);
+        const response = await axiosInstance.delete(`/api/admin/products${id}`);
         return response.data;
     } catch (error) {
         const axiosError = error as AxiosError;

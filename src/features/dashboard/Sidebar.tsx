@@ -4,6 +4,7 @@ import { AppRoute } from '@/enums';
 import { menuItems } from '@/mock/menuItems';
 import { UserContacts } from './UserContacts';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useUserStore } from '@/store';
 import { useWindowWidth } from '@/lib/hooks/useWindowWidth';
 
 export const Sidebar = () => {
@@ -12,14 +13,16 @@ export const Sidebar = () => {
   const {isMobile} = useWindowWidth();
   const logout = useAuthStore((state) => state.logout);
   const {pathname} = useLocation();
+  const clearUser = useUserStore((state) => state.clearUser)
 
   const linkClass = 'flex gap-5 md:gap-2 p-0 w-full items-center transition-all duration-200';
 
-
-
   const handleLogout = () => {
-    logout();
-    navigate(AppRoute.ROOT);
+      console.log("1. Натиснуто кнопку виходу");
+      logout();
+      clearUser();
+      console.log("2. Стор очищено, робимо navigate");
+      navigate(AppRoute.ROOT);
   };
 
   return (

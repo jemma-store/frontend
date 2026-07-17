@@ -8,6 +8,7 @@ export interface UserState {
   isAuthLoading: boolean;
   setUser: (user: IUserItem) => void;
   setAuthLoading: (isLoading: boolean) => void;
+  clearUser : () => void;
 }
 
 export const useUserStore = create<UserState>((set) => ({
@@ -16,6 +17,7 @@ export const useUserStore = create<UserState>((set) => ({
   isAuthLoading: true,
   setUser: (user) => set({ currentUser: user }),
   setAuthLoading: (isLoading) => set({ isAuthLoading: isLoading }),
+  clearUser: () => set({currentUser : null}),
   isAdmin: () => {
     const user = useUserStore.getState().currentUser;
     return user?.role === 'ADMIN';
