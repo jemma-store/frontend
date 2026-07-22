@@ -1,20 +1,14 @@
 import { AppRoute } from "@/enums";
 import { useLocation, Link } from "react-router-dom"
-
-import { deliveryMethods, paymentMethods } from "@/constants/checkoutOptions";
-
+import { deliveryMethods } from "@/constants/checkoutOptions";
 import { IFullOrderDetails } from "@/types/orderDetails";
 
 export const OrderCreatedSuccess = () => {
 
     const location = useLocation();
     const orderData = location.state as IFullOrderDetails;
-
     const deliveryMethodIdFromServer = orderData.orderDetails.deliveryMethod;
-    const paymentMethodIdFromServer = orderData.orderDetails.paymentMethod;
-
     const deliveryMethodObj = deliveryMethods.find((item) => item.id === deliveryMethodIdFromServer);
-    const paymentMethodObj = paymentMethods.find((item) => item.id === paymentMethodIdFromServer) 
 
     return (
         <>
@@ -40,10 +34,6 @@ export const OrderCreatedSuccess = () => {
                     <div className="flex justify-between">
                         <span>Email підтвердження</span>
                         <span className="text-[#5B242A] text-[16px] text-end">{orderData.orderDetails.email}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                        <span className="shrink-0">Спосіб оплати</span>
-                        <span className="text-[#5B242A] text-[16px] text-right">{paymentMethodObj?.label}</span>
                     </div>
                 </div>
 

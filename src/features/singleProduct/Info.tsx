@@ -216,12 +216,11 @@ export const Info = ({ product }: { product: IProductItem }) => {
 
                 <span className="font-medium text-grey block mt-5">Оплату можна здійснити:</span>
                   <ul className="text-grey list-disc px-5" >
-                    <li> Готівкою при отриманні;</li>
-                    <li> Післяплатою від Нової Пошти;</li>
-                    <li>Картою Visa / MasterCard;</li>
-                    <li>Скористатися сервісами LiqPay, Приват24, Monobank;</li>
+                    <li>Готівкою при отриманні;</li>
+                    <li>Післяплатою від Нової Пошти;</li>
+                    <li>Скористатися сервісом LiqPay</li>
                     <li>Оформити оплату частинами від Приват 24, Monobank;</li>
-                    <li> Подарунковим сертифікатом ТМ "Jemma".</li>
+                    <li>Подарунковим сертифікатом ТМ "Jemma".</li>
                   </ul>
               </div>
             </AccordionContent>

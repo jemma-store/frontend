@@ -1,8 +1,6 @@
 import ArrowLeft from './icons/arrow-left.svg';
 import FilterIcon from './icons/filter.svg';
 
-import { Visa } from './icons/Visa';
-import { MasterCard } from './icons/MasterCard'
 import { Logo } from './icons/Logo';
 import { ArrowUp } from './icons/ArrowUp';
 import { SortIcon } from './icons/SortIcon';
@@ -68,8 +66,6 @@ import SP2 from './images/single-product-2.jpg';
 export {
   ArrowLeft,
   FilterIcon,
-  Visa,
-  MasterCard,
   MailIcon,
   DeleteIcon,
   InfoIcon,

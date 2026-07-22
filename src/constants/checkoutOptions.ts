@@ -11,11 +11,3 @@ export const deliveryMethods = [
   { id: 'NOVA_POST_PARCEL_LOCKER', label: 'Поштомат Нова Пошта', price: 'Безкоштовно' },
   { id: 'NOVA_POST_DEPARTMENT', label: 'Відділення Нова Пошта', price: 'Безкоштовно' },
 ];
-
-export const paymentMethods = [
-  { id: 'ON_DELIVERY', label: 'Оплата при отриманні' },
-  { id: 'BY_CARD', label: 'Оплата платіжною картою VISA/Mastercard' },
-  { id: 'IN_INSTALLMENTS_PRIVATBANK', label: 'Оплата частинами ПриватБанк' },
-  { id: 'IN_INSTALLMENTS_MONOBANK', label: 'Оплата частинами Monobank' },
-  { id: 'GIFT_CERTIFICATE', label: 'Подарунковий сертифікат' },
-];

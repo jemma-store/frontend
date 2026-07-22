@@ -16,14 +16,6 @@ export const FILTER_BY_DELIVERY_METHOD : FilterOption[] = [
    { label: 'Поштомат Нової пошти', value: 'NOVA_POST_PARCEL_LOCKER' },
 ]
 
-export const FILTER_BY_PAYMENT_METHOD : FilterOption[] = [
-   { label: 'При отриманні', value: 'ON_DELIVERY' },
-   { label: 'Оплата платіжною картою VISA/Mastercard', value: 'BY_CARD' },
-   { label: 'ПриватБанк розстрочка', value: 'IN_INSTALLMENTS_PRIVATBANK' },
-   { label: 'МоноБанк розстрочка', value: 'IN_INSTALLMENTS_MONOBANK' },
-   { label: 'Подарунковий сертифікат', value: 'GIFT_CERTIFICATE' },
-]
-
 export const FILTER_BY_CATEGORY : FilterOption[] = [
   { label: 'Підвіска', value: 'Підвіски' },
   { label: 'Каблучка', value: 'Каблучки' },

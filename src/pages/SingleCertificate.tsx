@@ -188,9 +188,7 @@ export const SingleCertificate = () => {
                     <ul className='list-disc text-grey space-y-1 pl-5'>
                       <li> Готівкою при отриманні;</li>
                       <li>Післяплатою від Нової Пошти;</li>
-                      <li> Картою Visa / MasterCard;</li>
-                      <li>Скористатися сервісами LiqPay, Приват24, Monobank;</li>
-                      <li>Оформити оплату частинами від Приват 24, Monobank;</li>
+                      <li>Скористатися сервісом LiqPay</li>
                       <li>Подарунковим сертифікатом ТМ "Jemma"</li>
                       </ul>
                   </span>

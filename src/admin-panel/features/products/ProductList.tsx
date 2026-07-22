@@ -28,7 +28,7 @@ export const ProductList = ({filteredProducts, searchQuery, category, collection
         return () => controller.abort();
     }, [currentPage]);
 
-    if (loading) return <div>Завантажання... 🔄</div>
+    if (loading) return <div className="text-center py-20 text-xl text-[#727272]">Завантажання... 🔄</div>
 
     const productToDisplay = searchQuery.trim().length >= 1 || category || collection 
     ? filteredProducts 
@@ -37,7 +37,7 @@ export const ProductList = ({filteredProducts, searchQuery, category, collection
     if(productToDisplay.length === 0) {
         return (
             <div className="flex justify-center items-center py-20 text-xl text-[#727272]">
-                За вашим запитом нічого не знайдено 
+                Товарів не знайдено
             </div>
         )
     }

@@ -33,8 +33,6 @@ const Header = () => {
   const isAdmine = currentUser?.role === "ADMIN";
   
   const { page, sortBy, priceRange } = useCatalogStore();
-
-  console.log("RENDER HEADER. Поточний юзер:", user);
   
   const promoMessage = "Безкоштовна доставка кур'єром Нової Пошти!";
 

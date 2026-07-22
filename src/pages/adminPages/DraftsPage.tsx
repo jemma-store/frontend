@@ -17,36 +17,47 @@ export const DraftsPage = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchedProducts, setSearchedProducts] = useState([]);
     const [drafts, setDrafts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const currentPage = useCatalogStore((state) => state.page)
-    
+
     useEffect(() => {
         const fetchDrafts = async () => {
             try {
-                const data = await getDraftService(0, 12)
-                setDrafts(data.content)
+                setIsLoading(true);
+                const data = await getDraftService(0, 12);
+                setDrafts(data.content);
             } catch (error) {
-                console.error("Помилка завантаження чернеток", error)
+                console.error("Помилка завантаження чернеток", error);
+            } finally {
+                setIsLoading(false);
             }
         }
-        fetchDrafts()
+        fetchDrafts();
     }, [])
 
     useEffect(() => {
-            const timerId = setTimeout(async () => {
+        const timerId = setTimeout(async () => {
             if (searchQuery.length === 0 && !category && !collection) {
                 setSearchedProducts([]);
                 return;
             }
             
-            const data = await searchQueryService(
-                searchQuery,
-                12,
-                currentPage > 0 ? currentPage - 1 : 0, 
-                category ? [category] : [],     
-                collection ? [collection] : []  
-            );
-            
-            setSearchedProducts(data?.content || []); 
+            try {
+                setIsLoading(true);
+                const data = await searchQueryService(
+                    searchQuery,
+                    12,
+                    currentPage > 0 ? currentPage - 1 : 0, 
+                    category ? [category] : [],     
+                    collection ? [collection] : []  
+                );
+                console.log("Результат пошуку:", data?.content);
+                setSearchedProducts(data?.content || []); 
+            } catch (error) {
+                console.error("Помилка пошуку", error);
+            } finally {
+                setIsLoading(false);
+            }
         }, 500);
     
         return () => clearTimeout(timerId);
@@ -116,7 +127,12 @@ export const DraftsPage = () => {
             </div>
 
             <div className="grid grid-cols-3 gap-15 pb-14">
-                {draftsToDisplay.length > 0 ? (
+                {/* Спочатку перевіряємо, чи йде завантаження */}
+                {isLoading ? (
+                    <div className="col-span-3 text-center py-20 text-xl text-[#727272]">
+                         Завантаження...
+                    </div>
+                ) : draftsToDisplay.length > 0 ? (
                     draftsToDisplay.map((item: any) => (
                         <AdminProductCard
                             key={item.id}
@@ -128,7 +144,7 @@ export const DraftsPage = () => {
                     ))
                 ) : (
                     <div className="col-span-3 text-center py-20 text-xl text-[#727272]">
-                        За вашим запитом чернеток не знайдено
+                         За вашим запитом нічого не знайдено 
                     </div>
                 )}
             </div>

@@ -10,8 +10,7 @@ import { Icons } from '@/admin-panel/icons';
 import { STATUS_CONFIG } from '@/admin-panel/constants/statusConfig';
 import { AppRoute } from '@/enums';
 import { OrderCard } from '@/admin-panel/components/OrderCard';
-import { FILTER_BY_DELIVERY_METHOD, FILTER_BY_PAYMENT_METHOD } from '@/admin-panel/constants/filterByDate';
-import { MasterCard } from '@/assets';
+import { FILTER_BY_DELIVERY_METHOD } from '@/admin-panel/constants/filterByDate';
 
 
 export const OrderInfo = () => {
@@ -44,10 +43,6 @@ export const OrderInfo = () => {
     const deliveryLabel = FILTER_BY_DELIVERY_METHOD.find(
         (item) => item.value === order?.orderDetails.deliveryMethod
         )?.label || order?.orderDetails.deliveryMethod;
-
-    const paymentLabel = FILTER_BY_PAYMENT_METHOD.find(
-        (item) => item.value === order?.orderDetails.paymentMethod
-        )?.label || order?.orderDetails.paymentMethod;
 
     const fullName = `${order?.orderDetails.lastName} ${order?.orderDetails.firstName} ${order?.orderDetails.fatherName}`
     const firstLastName = `${order?.orderDetails.firstName} ${order?.orderDetails.lastName}`
@@ -158,18 +153,6 @@ return (
            <OrderCard title='Оплата'>
                 <div className="flex justify-between text-[12px]">
                     <span className='whitespace-nowrap'>Спосіб оплати:</span>
-                    <span className='text-end'>{paymentLabel}</span>
-                </div>
-                <div className="flex justify-between text-[12px]">
-                    <span>Картка: </span>
-                    <div className='flex items-center gap-1'>
-                        <MasterCard/>
-                        <span>**** **** **** 8922</span>
-                    </div>
-                </div>
-                <div className="flex justify-between text-[12px]">
-                    <span>Номер телефону: </span>
-                    <span>{`${order.orderDetails.phone ?? "Телефон не вказаний"}`}</span>
                 </div>
             </OrderCard>  
             <OrderCard title='Доставка'>
