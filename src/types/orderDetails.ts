@@ -27,7 +27,7 @@ export interface IFullOrderDetails {
     status: string;
     totalPrice: number;
     createdAt: string; 
-    items: IOrderItem[]; 
+    items: IOrderItem[];
     orderDetails: {
         firstName: string;
         lastName: string;
@@ -38,10 +38,15 @@ export interface IFullOrderDetails {
         deliveryMethod: string;
         paymentMethod: string;
     };
-    cardData : {
-        curdNumber : string;
-        expiryData : string;
-    };
     isGift: boolean | null;
     length : string;
+}
+
+export interface IOrderCreationResponse {
+    order: IFullOrderDetails;
+    payment?: {
+        checkoutUrl: string;
+        data: string;
+        signature: string;
+    };
 }

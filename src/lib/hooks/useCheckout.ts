@@ -12,6 +12,7 @@ import {
 import { IOrderRequest, IOrderCreationDTO } from '@/types/order';
 import { AppRoute, DeliveryMethod, LocalStorage, OrderAction, OrderStage, PaymentMethod } from '@/enums';
 import { useSmartCart } from './useSmartCart';
+import { IOrderCreationResponse } from '@/types/orderDetails';
 
 type Return = {
   orderProcessStage: OrderStage;
@@ -60,11 +61,6 @@ const DELIVERY_INITIAL_VALUE = {
 
 const PAYMENT_INITIAL_VALUE = {
   method: PaymentMethod.CARD,
-  cardData: {
-    number: '',
-    expiry: '',
-    cvv: '',
-  },
 };
 
 const INITIAL_STATE: State = {
@@ -95,7 +91,7 @@ const reducer: Reducer<State, ReducerAction> = (state, action) => {
 const useCheckout = (): Return => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const navigate = useNavigate();
-  const { cartItems, clearCart } = useSmartCart(); // Додав clearCart для очищення після успіху
+  const { cartItems, clearCart } = useSmartCart(); 
   const currentUser = useUserStore((state) => state.currentUser);
   const sessionId = localStorageService.getItem(LocalStorage.SESSION_ID);
 
@@ -111,7 +107,6 @@ const useCheckout = (): Return => {
   const onOrderConfirmed = async () => {
     const { contactsFormValue, deliveryFormValue, paymentFormValue } = state;
 
-    // Створюємо масив товарів за новою структурою
     const items = cartItems.map((item) => ({
       id: 0,
       cartId: 0,
@@ -119,7 +114,6 @@ const useCheckout = (): Return => {
       quantity: item.quantity,
     }));
 
-    // Формуємо об'єкт з даними замовника та оплати (orderCreationDTO)
     const orderCreationDTO: IOrderCreationDTO = {
       firstName: contactsFormValue.firstName,
       lastName: contactsFormValue.lastName,
@@ -128,22 +122,13 @@ const useCheckout = (): Return => {
       email: contactsFormValue.email,
       city: deliveryFormValue.city,
       isGift: contactsFormValue.isGift,
-      cardNumber: paymentFormValue.cardData.number,
-      expiryDate: paymentFormValue.cardData.expiry,
-      cvv: paymentFormValue.cardData.cvv,
     };
 
     try {
-      let result;
+      let result : IOrderCreationResponse | undefined; 
 
       if (currentUser?.id) {
-        // Авторизований користувач
-        const userCart = {
-          id: currentUser.id, // ID кошика (якщо бекенд чекає саме ID кошика, переконайся, що він тут)
-          userId: currentUser.id,
-          items,
-        };
-        
+        const userCart = { id: currentUser.id, userId: currentUser.id, items };
         result = await createOrderService(
           userCart,
           orderCreationDTO,
@@ -151,16 +136,10 @@ const useCheckout = (): Return => {
           deliveryFormValue.method
         );
       } else if (sessionId) {
-        // Гість
         const guestOrderRequest: IOrderRequest = {
-          userCart: {
-            id: 0, 
-            userId: 0,
-            items,
-          },
+          userCart: { id: 0, userId: 0, items },
           orderCreationDTO,
         };
-
         result = await createOrderGuestService(
           guestOrderRequest,
           sessionId,
@@ -169,15 +148,39 @@ const useCheckout = (): Return => {
         );
       }
 
-      if (result) {
-        dispatch({ type: OrderAction.CONFIRM_ORDER, payload: { orderId: result.id } });
-        clearCart(); // Очищуємо кошик після успішного замовлення
-        navigate(AppRoute.PRODUCTS);
+      console.log("📦 Що лежить у змінній result:", result?.order?.orderNumber);
+      
+      if (result && result.order) {
+        dispatch({ type: OrderAction.CONFIRM_ORDER, payload: { orderId: result.order.id } });
+        clearCart(); 
+
+        if (result.payment && result.payment.data && result.payment.signature) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = result.payment.checkoutUrl;
+
+            const dataInput = document.createElement('input');
+            dataInput.type = 'hidden';
+            dataInput.name = 'data';
+            dataInput.value = result.payment.data;
+
+            const signatureInput = document.createElement('input');
+            signatureInput.type = 'hidden';
+            signatureInput.name = 'signature';
+            signatureInput.value = result.payment.signature;
+
+            form.appendChild(dataInput);
+            form.appendChild(signatureInput);
+            document.body.appendChild(form);
+
+            form.submit(); 
+        } else {
+            navigate(AppRoute.PRODUCTS);
+        }
       }
     } catch (err) {
       console.error('Помилка при створенні замовлення:', err);
     }
-
     dispatch({ type: OrderAction.RESET_ORDER_PROCESS });
   };
 

@@ -16,7 +16,7 @@ import {
 import { useAuth } from '@/lib/hooks/useAuth';
 
 export const PopUpConfirmationPhone = () => {
-  const [code, setCode] = useState<string[]>(['', '', '', '']);
+  const [code, setCode] = useState<string[]>(['', '', '', '', '', '']);
   const [showResend, setShowResend] = useState(false);
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
   const { pathname } = useLocation();
@@ -83,12 +83,19 @@ export const PopUpConfirmationPhone = () => {
     inputsRef.current[0]?.focus();
   };
 
+  const handlePaste = (e : React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const pastedText = e.clipboardData.getData('text');
+    const arrayPasted = pastedText.split("")
+    setCode(arrayPasted)
+  }
+
   return (
     <Dialog open={isOpen} onOpenChange={close}>
       <DialogTrigger className="hidden" />
       <DialogContent className="max-w-[448px] flex flex-col items-center gap-6 p-5">
         <DialogTitle className="w-[309px] text-center text-second  font-[500] font-main">
-          Підтвердження номеру телефону
+          Підтвердження електронної пошти 
         </DialogTitle>
         <DialogDescription className="hidden" />
 
@@ -103,6 +110,7 @@ export const PopUpConfirmationPhone = () => {
                 key={i}
                 type="text"
                 maxLength={1}
+                onPaste={(e) => handlePaste(e)}
                 value={digit}
                 ref={(el: HTMLInputElement | null) => {
                   inputsRef.current[i] = el;

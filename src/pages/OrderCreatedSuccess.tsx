@@ -7,7 +7,7 @@ export const OrderCreatedSuccess = () => {
 
     const location = useLocation();
     const orderData = location.state as IFullOrderDetails;
-    const deliveryMethodIdFromServer = orderData.orderDetails.deliveryMethod;
+    const deliveryMethodIdFromServer = orderData?.orderDetails?.deliveryMethod;
     const deliveryMethodObj = deliveryMethods.find((item) => item.id === deliveryMethodIdFromServer);
 
     return (
@@ -29,11 +29,11 @@ export const OrderCreatedSuccess = () => {
                     </div>
                     <div className="flex justify-between">
                         <span>Сума замовлення</span>
-                        <span className="text-[#5B242A] text-[16px] text-end">{orderData.totalPrice.toLocaleString('uk-UA')} грн</span>
+                        <span className="text-[#5B242A] text-[16px] text-end">{orderData.totalPrice?.toLocaleString('uk-UA')} грн</span>
                     </div>
                     <div className="flex justify-between">
                         <span>Email підтвердження</span>
-                        <span className="text-[#5B242A] text-[16px] text-end">{orderData.orderDetails.email}</span>
+                        <span className="text-[#5B242A] text-[16px] text-end">{orderData.orderDetails?.email}</span>
                     </div>
                 </div>
 
@@ -56,8 +56,6 @@ export const OrderCreatedSuccess = () => {
                 </div>
         )}
         </>
-       
-       
     )
 }
 

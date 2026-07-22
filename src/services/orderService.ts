@@ -1,6 +1,7 @@
 import { request } from "@/api";
 import { ApiEndpoint, HttpMethod } from "@/enums";
 import { IFullOrderDetails } from "@/types/orderDetails";
+import { IOrderCreationResponse } from "@/types/orderDetails";
 import { IOrderCreationDTO, IUserCart } from "@/types/order";
 
 const createOrderService = async (
@@ -9,7 +10,7 @@ const createOrderService = async (
   paymentMethod: string, 
   deliveryMethod: string,
 )  => {
-  return await request<IFullOrderDetails>({
+  return await request<IOrderCreationResponse>({
     url: `${ApiEndpoint.ORDERS}/create`,
     method: HttpMethod.POST,
     params: {
@@ -33,7 +34,7 @@ const createOrderGuestService = async (
   paymentMethod: string,
   deliveryMethod: string,
 ) => {
-  return await request<IFullOrderDetails>({
+  return await request<IOrderCreationResponse>({
     url: `${ApiEndpoint.ORDERS}/guest/create`,
     method: HttpMethod.POST,
     params: {

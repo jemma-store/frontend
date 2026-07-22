@@ -8,6 +8,6 @@ export const personalFields = [
 
 export const deliveryMethods = [
   { id: 'NOVA_POST_COURIER', label: "Кур'єр Нова Пошта", price: 'Безкоштовно' },
-  { id: 'NOVA_POST_PARCEL_LOCKER', label: 'Поштомат Нова Пошта', price: 'Безкоштовно' },
   { id: 'NOVA_POST_DEPARTMENT', label: 'Відділення Нова Пошта', price: 'Безкоштовно' },
+  { id: 'NOVA_POST_PARCEL_LOCKER', label: 'Поштомат Нова Пошта', price: 'Безкоштовно' },
 ];

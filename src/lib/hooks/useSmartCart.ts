@@ -89,9 +89,6 @@ export const useSmartCart = () => {
         email: formData.personalInfo.email,
         city: formData.deliveryInfo.city,
         isGift: formData.personalInfo.isGift,
-        cardNumber: formData.paymentInfo.cardData?.number || '',
-        expiryDate: formData.paymentInfo.cardData?.expiry || '',
-        cvv: formData.paymentInfo.cardData?.cvv || '',
       };
 
       if (currentUser) {

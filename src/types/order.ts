@@ -19,9 +19,6 @@ export interface IOrderCreationDTO {
     email: string;
     city: string;
     isGift: boolean;  
-    cardNumber: string;
-    expiryDate: string;
-    cvv: string;
 }
 
 export interface IOrderRequest {
