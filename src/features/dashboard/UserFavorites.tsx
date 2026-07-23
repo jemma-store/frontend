@@ -69,7 +69,7 @@ export const UserFavorites = () => {
                         />
                       </div>
                     ))
-                    .slice(0, 1)}
+                    ?.slice(0, 1)}
                 
                   <div className='absolute bottom-2 left-0 right-0 flex justify-center z-20'>
                     <Link to={`${AppRoute.PRODUCTS}/${product.id}/${product.categoryName}/${product.collectionName}/${product.name}`}>

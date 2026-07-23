@@ -23,7 +23,7 @@ export const NewCollection = ({
   const setFavorites = useProductStore((state) => state.setFavorites);
 
   const favorites = useProductStore((state) => state.favorites);
-  const visibleProducts = products.slice(4,7);
+  const visibleProducts = products?.slice(4,7);
 
   const firstProduct = visibleProducts[0];
   const isInFavoriteFirst = favorites.includes(firstProduct?.id);

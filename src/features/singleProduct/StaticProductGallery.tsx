@@ -29,7 +29,7 @@ export const StaticProductGallery:FC<StaticProductGalleryProps> = ({product}) =>
                             role="img"
                         />
                     ))
-                    .slice(1)} 
+                    ?.slice(1)} 
             </div>
         </div>
     );

@@ -22,7 +22,7 @@ export const Sale = ({
   const { addToCart, removeFromCart, isInCart } = useSmartCart();
   const setFavorites = useProductStore((state) => state.setFavorites);
   const favorites = useProductStore((state) => state.favorites);
-  const visibleProducts = discountCol.slice(0, 3);
+  const visibleProducts = discountCol?.slice(0, 3);
   const lastProduct = visibleProducts[2];
   const isInFavoriteLast = favorites.includes(lastProduct?.id);
   const isInCartLast = isInCart(lastProduct?.id);
@@ -39,7 +39,7 @@ export const Sale = ({
         <div className="grid grid-cols-1 sm:grid sm:grid-cols-2 xl:grid xl:grid-cols-2 gap-4">
           <div className="flex flex-col gap-4 w-full order-2 xl:w-[650px] xl:order-1 sm:order-1">
             <div className="flex flex-row justify-between xl:gap-4 gap-2">
-              {visibleProducts.slice(0, 2).map((product) => (
+              {visibleProducts?.slice(0, 2).map((product) => (
                 <ProductCard
                   key={product.id}
                   product={product}

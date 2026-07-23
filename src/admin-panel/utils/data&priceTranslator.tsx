@@ -1,6 +1,6 @@
 export const formatDate = (dateString: string) : string => {
     if (!dateString) return "Дата замовлення не встановленна";
-    return dateString.slice(0, 10).replaceAll("-", ".");
+    return dateString?.slice(0, 10).replaceAll("-", ".");
 }
 
 export const formatPrice = (price: number): string => {

@@ -41,7 +41,7 @@ export const CardCart: FC<ICardCart> = ({ item, quantity }) => {
     {isTablet || isDesktop? (
       <article>
         <div className='flex gap-5'>
-          {item.images.slice(0,1).map((image, index) => (
+          {item.images?.slice(0,1).map((image, index) => (
            <img 
            key={index}
            src={image.url} 
@@ -103,7 +103,7 @@ export const CardCart: FC<ICardCart> = ({ item, quantity }) => {
     ) : (
       <article>
       <div className='flex gap-5 mt-5 w-full h-full'>
-        {item.images.slice(0,1).map((image, index) => (
+        {item.images?.slice(0,1).map((image, index) => (
           <img 
           key={index}
           src={image.url} 

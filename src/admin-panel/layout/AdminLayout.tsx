@@ -33,7 +33,7 @@ export const AdminLayout = () => {
     const breadcrumbItems: { label: string; href: string }[] = [];
 
     pathNames.forEach((segment, index) => {
-        const href = "/" + pathNames.slice(0, index + 1).join("/");
+        const href = "/" + pathNames?.slice(0, index + 1).join("/");
         const label = breadcrumbDictionary[segment];
 
         if (label) {

@@ -60,7 +60,7 @@ export const UserOrders = () => {
           <div key={item.id} className="container md:pl-0 md:pt-10">
           <div className="flex justify-between items-baseline pb-3 md:pb-12 lg:pb-7">
             <span className="text-[20px] font-normal md:font-medium">
-              Замовлення № {item.orderNumber.slice(-4)}
+              Замовлення № {item.orderNumber?.slice(-4)}
             </span>
             <span className="text-[16px] text-[#727272]">
               {dateChanger(item.createdAt)}

@@ -49,7 +49,7 @@ export const CardCheckout: FC<ICardCheckout> = ({ item, quantity }) => {
 
         <div className='grid grid-cols-[1fr_1.5fr] gap-2 md:gap-0 pt-4 md:flex md:flex-col md:pt-10 lg:pt-12 lg:grid '>
           <div className="w-full h-auto">
-            {item.images.slice(0, 1).map((image, index) => (
+            {item.images?.slice(0, 1).map((image, index) => (
               <img
                 key={index}
                 src={image.url}

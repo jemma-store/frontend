@@ -13,7 +13,7 @@ export const Collections = () => {
   const mainImageUrl = productWithImageForMain?.images[0]?.url;
   const secondaryCollections = collections
   .filter((c) => c.name.toLowerCase() !== 'heart')
-  .slice(0, 4);
+  ?.slice(0, 4);
   
   return (
     <section className="relative w-full section-indent">

@@ -72,7 +72,7 @@ export const ProductCard = ({
               className={cn(' object-cover w-full h-full')}
             />
           ))
-          .slice(0, 1)}
+          ?.slice(0, 1)}
 
         <div className="absolute flex flex-col w-full top-2 gap-4 px-2 items-end sm:flex sm:flex-col sm:top-1 sm:items-end sm:opacity-100 xl:top-4 xl:px-5 z-5 xl:opacity-0 xl:group-hover:opacity-100 easy-in-out transition-transform duration-500">
           <button className="btn w-6 h-6" onClick={() => setFavorites(product.id)}>

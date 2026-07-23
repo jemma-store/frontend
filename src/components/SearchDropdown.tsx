@@ -91,7 +91,7 @@ export const SearchDropdown = ({ isOpen, onClose }: { isOpen: boolean; onClose: 
             ) : results.length === 0 ? (
               <div className="p-4 text-center bg-main">Нічого не знайдено</div>
             ) : (
-              results.slice(0, 10).map((product) => (
+              results?.slice(0, 10).map((product) => (
                 <Link
                   key={product.id}
                   to={AppRoute.PRODUCT.replace(':id', product.id.toString())

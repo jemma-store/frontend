@@ -70,7 +70,7 @@ return (
                 <Card key={product.id} >
                   <CardContent className={cn('relative w-full overflow-hidden aspect-square')}>
                     <div className="w-full h-full">
-                        {product?.images.slice(0, 1).map((image, index) => (
+                        {product?.images?.slice(0, 1).map((image, index) => (
                             <div 
                             key={index} 
                             className='w-full h-full overflow-hidden'>
