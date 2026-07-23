@@ -41,6 +41,7 @@ const initialFormData = {
     },
     productSizes: [],
     quantity: null,
+    sku : 0,
     isNew: false,
     categoryName: "",
     collectionName: "",

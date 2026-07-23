@@ -75,8 +75,8 @@ const verifyPhoneNumber = async (code: VerifyRequest, sessionToken : string | nu
 
 const verifyPhoneLogin = async (code: VerifyRequest, sessionToken : string | null): Promise<VerifyResponse> => {
 
-   if (sessionToken === null) {
-   throw new Error("Помилка сесії: відсутній токен верифікації.");
+  if (sessionToken === null) {
+    throw new Error("Помилка сесії: відсутній токен верифікації.");
   }
 
   const data = await request<VerifyResponse>({

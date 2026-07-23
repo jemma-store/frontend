@@ -1,6 +1,6 @@
 import { Reducer, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import axiosInstance from '@/api/axiosInstance';
 import { AppRoute, AuthAction } from '@/enums';
 import { LoginRequest, RegisterRequest, VerifyRequest } from '@/types/auth';
 import { login, registerUser, verifyPhoneLogin, verifyPhoneNumber } from '@/services/authService';
@@ -115,6 +115,25 @@ const useAuth = (): Return => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const navigate = useNavigate();
 
+  const handleSuccessfulAuth = async (token: string, refreshToken: string) => {
+    useModalStore.getState().close();
+    useAuthStore.getState().setTokens(token, refreshToken);
+
+    try {
+      const response = await axiosInstance.get('/api/users/token');
+      const userRole = response.data?.role;
+
+      if (userRole === 'ADMIN') {
+        navigate('/admin/dashboard'); 
+      } else {
+        navigate(AppRoute.ROOT);
+      }
+    } catch (error) {
+      console.error("Не вдалося отримати роль користувача:", error);
+      navigate(AppRoute.ROOT); 
+    }
+  };
+
   const onLoginFormChange = (newValue: LoginRequest) => {
     dispatch({ type: AuthAction.LOGIN_FORM, payload: newValue });
   };
@@ -132,9 +151,7 @@ const useAuth = (): Return => {
     const res = await verifyPhoneNumber(code, token);
 
      if (res) {
-      useModalStore.getState().close();
-      useAuthStore.getState().setTokens(res.token, res.refresh_token);
-      navigate(AppRoute.ROOT);
+      await handleSuccessfulAuth(res.token, res.refresh_token);
       }
 
     dispatch({ type: AuthAction.RESET_FORM })
@@ -151,9 +168,7 @@ const useAuth = (): Return => {
       const res = await verifyPhoneLogin(code, token);
 
     if (res) {
-      useModalStore.getState().close();
-      useAuthStore.getState().setTokens(res.token, res.refresh_token);
-      navigate(AppRoute.ROOT);
+      await handleSuccessfulAuth(res.token, res.refresh_token);
       }
 
     dispatch({ type: AuthAction.RESET_FORM })

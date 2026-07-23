@@ -10,7 +10,6 @@ import { formatCurrency } from "@/utils/formattersUAH"
 import { getTotalRevenue, getTotalOrders, getTotalProducts, getTotalUsers} from "@/admin-panel/services/dashBoardStatsService"
 import { OrderRow } from "@/admin-panel/features/orders/components/OrderRow"
 import { IFullOrderDetails } from "@/types/orderDetails"
-import { updateDiscountService } from '@/services/updateDiscountService';
 import { useProductStore } from "@/store"
 
 export const DashboardPage = () => {
@@ -21,17 +20,8 @@ export const DashboardPage = () => {
     const [totalOrdersCount, setTotalOrdersCount] = useState <number | string>(0)
     const [totalPages, setTotalPages] = useState<number | string>(0)
     const [totalUsers, setTotalUsers] = useState<number | string>(0)
-    const {products, fetchProducts} = useProductStore()
+    const {fetchProducts} = useProductStore()
 
-    const productsToDiscount = products.content.filter((product) => product.id === 13 || product.id === 14 || product.id === 15);
-
-    const applyTestDiscount = async () => {
-        for (const item of productsToDiscount) {
-            console.log("Відправляю знижку для товару ID:", item.id);
-            await updateDiscountService(item.id, 10);
-        }
-        console.log("Всі запити на знижку відправлені та завершені.");
-    }
 
     useEffect(() => {
         const controller = new AbortController();
@@ -40,15 +30,6 @@ export const DashboardPage = () => {
             controller.abort();
         };
     }, []);
-
-    useEffect(() => {
-        console.log("Ефект оновлення знижки спрацював. Масив товарів:", products.content);
-        if (productsToDiscount.length > 0) {
-            applyTestDiscount();
-        }
-    }, [products.content]);
-
-  
 
     useEffect(() => {
        const fetchTotalOrdersCount = async () => {
@@ -120,7 +101,6 @@ export const DashboardPage = () => {
     ];
 
     return (
-        // <div className="pt-20 flex flex-col pb-22">
         <div className="flex flex-col">
             <div className="flex flex-row justify-between pr-15 pl-5 items-baseline">
                 <h2 className="text-[24px]">Дашборд</h2>

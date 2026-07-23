@@ -35,7 +35,7 @@ export const AddNewProduct = ({disabled} : AddNewProductProps) => {
             const createdProduct = await createProductService(payload);
             const newProductId = createdProduct.id;
             
-            console.log("Створено товар з ID:", newProductId);
+            console.log("Збережено товар з ID:", newProductId);
 
             for (const image of formData.images) {
                 if (!image.file) continue; 
@@ -45,19 +45,28 @@ export const AddNewProduct = ({disabled} : AddNewProductProps) => {
                 imageForm.append("productId", String(newProductId));
                 imageForm.append("isMain", String(image.isMainImage));
 
-                await axiosInstance.post("/api/admin/images/upload", imageForm, {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
+                try {
+                    await axiosInstance.post("/api/admin/images/upload", imageForm, {
+                        headers: {
+                            "Content-Type": "multipart/form-data"
+                        }
+                    });
+                } catch (imageError: any) {
+                    if (imageError.response?.status === 409) {
+                        console.warn(`Фото ${image.file.name} вже існує на сервері (409 Conflict). Пропускаємо.`);
+                    } else {
+                        console.error(`Не вдалося завантажити фото ${image.file.name}:`, imageError);
                     }
-                });
+                }
             }
-            console.log("Товар та фото успішно відправлені на сервер");
-            alert("✅ Товар успішно додано!");
+            
+            console.log("Товар та фото успішно оброблені");
+            alert("✅ Товар успішно збережено!");
             resetForm();
 
         } catch (error) {
-            console.error(error);
-            alert("❌ Сталася помилка. Перевір консоль.");
+            console.error("Помилка збереження товару:", error);
+            alert("❌ Сталася помилка при збереженні товару. Перевір консоль.");
         } finally {
             setIsLoading(false);
         }

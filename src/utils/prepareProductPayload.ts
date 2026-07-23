@@ -2,6 +2,7 @@ import { ProductFormState } from "@/admin-panel/types/productFormState";
 import { FILTER_BY_METAL, FILTER_BY_STONE } from "@/admin-panel/constants/filterByDate";
 
 export interface ProductPayload {
+    id? : number;
     name: string;
     productSizes: number[];
     price: {
@@ -40,6 +41,7 @@ export const prepareProductPayload = (data: ProductFormState): ProductPayload =>
 
 
     return {
+        id : data.id || undefined,
         name: data.name || "",
         productSizes: data.productSizes.length > 0 ? data.productSizes : [0],
         price: {

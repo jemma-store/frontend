@@ -18,6 +18,7 @@ export interface ProductFormState {
   };
   productSizes: number[];
   quantity: number | null;
+  sku : number;
   isNew: boolean;
   categoryName: string;
   collectionName: string;

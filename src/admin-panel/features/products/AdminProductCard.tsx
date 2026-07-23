@@ -1,6 +1,6 @@
-import { useState, useRef} from "react";
+import { useState} from "react";
 import { useNavigate } from "react-router-dom";
-import InfoIcon from "@/admin-panel/icons/InfoIcon";
+// import InfoIcon from "@/admin-panel/icons/InfoIcon";
 import VerticalBreadCrumble from "@/admin-panel/icons/VerticalBreadCrumble";
 import { IProductItem } from "@/types/product";
 // import { deleteProductByIdService } from "@/admin-panel/services/productService";
@@ -15,40 +15,30 @@ interface AdminProductCardProps {
 
 export const AdminProductCard = ({product, onDeleteCard} : AdminProductCardProps) => {
     const [isMenuOpen , setIsMenuOpen] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
-    const [tooltipPosition, setTooltipPosition] = useState("top-full right-0");
+    // const [isHovered, setIsHovered] = useState(false);
+    // const [tooltipPosition, setTooltipPosition] = useState("top-full right-0");
     const navigate = useNavigate();
-    const tooltipRef = useRef<HTMLDivElement>(null)
+    // const tooltipRef = useRef<HTMLDivElement>(null)
     const hasSizes = product.productSizes && product.productSizes.length > 0 ;
     const spacingClasses = hasSizes ? "pb-[11px] pt-[11px]" : "pt-9 pb-9";
 
-    const mockSizeQuantities = [
-        { size: "16", quantity: 5 },
-        { size: "16.5", quantity: 2 },
-        { size: "17", quantity: 12 },
-        { size: "17.5", quantity: 0 },
-        { size: "18", quantity: 4 },
-        { size: "18.5", quantity: 7 },
-        { size: "19", quantity: 9 },
-        { size: "19.5", quantity: 13 },
-    ];
-const handleMouseEnter = () => {
-    setIsHovered(true);
+// const handleMouseEnter = () => {
+// setIsHovered(true);
 
-    if (tooltipRef.current) {
-        const rect = tooltipRef.current.getBoundingClientRect();
-        const hasSpaceBelow = window.innerHeight - rect.bottom >= 360;
-        const hasSpaceRight = window.innerWidth - rect.right >= 150;
+//     if (tooltipRef.current) {
+//         const rect = tooltipRef.current.getBoundingClientRect();
+//         const hasSpaceBelow = window.innerHeight - rect.bottom >= 360;
+//         const hasSpaceRight = window.innerWidth - rect.right >= 150;
 
-        if (hasSpaceBelow) {
-            setTooltipPosition("top-full right-0");
-        } else if (hasSpaceRight) {
-            setTooltipPosition("bottom-full right-0");
-        } else {
-            setTooltipPosition("bottom-full right-0");
-        }
-    }
-}
+//         if (hasSpaceBelow) {
+//             setTooltipPosition("top-full right-0");
+//         } else if (hasSpaceRight) {
+//             setTooltipPosition("bottom-full right-0");
+//         } else {
+//             setTooltipPosition("bottom-full right-0");
+//         }
+//     }
+// }
 
     return (
         <div className="px-2 pt-2 bg-white flex flex-col w-full">
@@ -100,13 +90,13 @@ const handleMouseEnter = () => {
             <div className={`flex flex-col gap-2 ${spacingClasses}`}>
                 <div className="flex justify-between">
                     <span>Продажі</span>
-                    <span>29</span>
+                    <span>0</span>
                 </div>
                 <div className="flex justify-between">
                     <span>Залишок</span>
-                    <span>40</span>
+                    <span>{product.quantity}</span>
                 </div>
-                {product.productSizes && product.productSizes.length >= 1 && (
+                {/* {product.productSizes && product.productSizes.length >= 1 && (
                     <div className="flex justify-between items-center relative">
                         <span className="text-[12px] text-[#727272]">Залишки по розмірах</span>
                     <div 
@@ -139,7 +129,7 @@ const handleMouseEnter = () => {
                         <InfoIcon />
                     </div>
                     </div>
-                )}
+                )} */}
             </div>
         </div>
     )       

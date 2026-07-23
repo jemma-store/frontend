@@ -4,7 +4,7 @@ import { useProductForm } from "@/admin-panel/hooks/useProductForm"
 export const AddNewProductStart = ({disabled} : {disabled : boolean}) => {
 
     const name = useProductForm((state) => state.formData.name)
-    const sku = useProductForm((state) => state.formData.quantity);
+    const sku = useProductForm((state) => state.formData.sku);
     const price = useProductForm((state) => state.formData.price.normalPrice)
     const discount = useProductForm((state) => state.formData.price.discountPercentage)
     
